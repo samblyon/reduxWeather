@@ -5,7 +5,7 @@ export default function weatherReducer(state = [], action) {
     case FETCH_WEATHER:
       return ['hi'];
     case RESULTS_RECEIVED:
-      return [action.query, ...state];
+      return [action.payload, ...state]; // used to be action.query
     default: return state;
   }
 }

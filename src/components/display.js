@@ -1,13 +1,18 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 class Display extends Component {
   render(){
     return(
-      <div>Hi from the display!</div>
+      <div>{this.props.weather}</div>
     );
     //Map
     //Chart
   }
 }
 
-export default Display;
+const mapStateToProps = state => {
+  return { weather: state.weather };
+};
+
+export default connect(mapStateToProps)(Display);
