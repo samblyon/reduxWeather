@@ -33,10 +33,25 @@ class SearchBar extends Component {
 }
 
 const mapDispatchToProps = dispatch => {
-  return bindActionCreators({
-    doSearch
-  }, dispatch);
+  return {
+    doSearch: (query) => {
+      doSearch(query)
+      .then(response => {
+        console.log(response);
+        dispatch({
+          type: "RESULTS_RECEIVED",
+          payload: response.data
+        });
+      })
+      .catch( error => console.log(error));
+    }
+  }
 };
+// const mapDispatchToProps = dispatch => {
+//   return bindActionCreators({
+//     doSearch
+//   }, dispatch);
+// };
 
 // maps the dispatch method of the store to the callback props of the component;
 // returns the callback props that the presentational component (SearchBar) needs
