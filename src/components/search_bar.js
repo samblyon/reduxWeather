@@ -26,7 +26,16 @@ class SearchBar extends Component {
   render(){
     return(
       <form onSubmit={this._handleSubmit.bind(this)}>
-        <input type="text" onChange={this._onChange.bind(this)} value={this.state.query}/>
+        <div className="form-group">
+          <label >
+            Search for Weather by City
+            <input
+              type="text"
+              onChange={this._onChange.bind(this)}
+              value={this.state.query}
+              className="form-control"/>
+          </label>
+        </div>
       </form>
     );
   }

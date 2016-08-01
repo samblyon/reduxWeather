@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Chart from './chart'
+import Chart from './chart';
+import Map from './map';
 
 const getTemps = (report) => {
   return report.list.map((dataPoint) => {
@@ -15,9 +16,11 @@ class Display extends Component {
         <div key={report.city.name}>
           {report.city.name}
           <Chart data={getTemps(report)} />
+          <Map lat={report.city.coord.lat}
+              lng={report.city.coord.lon}
+          />
         </div>
       );
-      //Map
     });
     return(
       <div>{cities}</div>
