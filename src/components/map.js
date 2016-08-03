@@ -9,7 +9,7 @@ export default function Map (props) {
   return (
       <GoogleMapLoader
         containerElement={
-          <div style={{height: '150px'}} />
+          <div style={{height: '100%'}} />
         }
         googleMapElement={
           <GoogleMap

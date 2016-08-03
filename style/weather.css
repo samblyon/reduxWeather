@@ -1,6 +1,4 @@
-
-
-td:first-of-type {
-  height: 200px important!;
-  width: 250px important!;
+td:nth-child(2) {
+  height: 200px !important;
+  width: 250px !important;
 }
