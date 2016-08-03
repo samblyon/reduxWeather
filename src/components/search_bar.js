@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import doSearch from '../actions/searchActions';
+import { doSearch } from '../actions/search_actions';
 
 class SearchBar extends Component {
   constructor(props){
@@ -28,12 +28,13 @@ class SearchBar extends Component {
       <form onSubmit={this._handleSubmit.bind(this)}>
         <div className="form-group">
           <label >
-            Search for Weather by City
+            Search for weather by location (city or zip)
             <input
               type="text"
               onChange={this._onChange.bind(this)}
               value={this.state.query}
-              className="form-control"/>
+              className="form-control"
+              placeholder="San Francisco, California"/>
           </label>
         </div>
       </form>
@@ -46,7 +47,6 @@ const mapDispatchToProps = dispatch => {
     doSearch: (query) => {
       doSearch(query)
       .then(response => {
-        console.log(response);
         dispatch({
           type: "RESULTS_RECEIVED",
           payload: response.data

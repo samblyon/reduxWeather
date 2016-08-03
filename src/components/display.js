@@ -36,7 +36,7 @@ class Display extends Component {
           <tr>
             <th>City</th>
             <th>Location</th>
-            <th>Avg Temp</th>
+            <th>Temperature (C)</th>
           </tr>
         </thead>
         <tbody>
@@ -48,7 +48,15 @@ class Display extends Component {
 }
 
 const mapStateToProps = state => {
-  return { weather: state.weather };
+  return {
+    weather: state.weather
+  };
 };
 
-export default connect(mapStateToProps)(Display);
+// const mapDispatchToProps = dispatch => {
+//   return {
+//     remove: (city) => remove(city)
+//   };
+// }
+
+export default connect(mapStateToProps, null)(Display);
