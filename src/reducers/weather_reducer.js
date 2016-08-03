@@ -1,4 +1,7 @@
-import { RESULTS_RECEIVED } from '../actions/action_types';
+import {
+  RESULTS_RECEIVED,
+  REMOVE_CITY
+} from '../actions/action_types';
 import expect from 'expect';
 
 const filterState = (state, newCityName) => {
@@ -14,6 +17,8 @@ export default function weatherReducer(state = [], action) {
         action.payload,
         ...filterState(state, action.payload.city.name)
       ];
+    case REMOVE_CITY:
+      return filterState(state, action.payload.name);
     default: return state;
   }
 }

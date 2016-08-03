@@ -1,6 +1,9 @@
 import reducer from '../src/reducers/weather_reducer';
 import expect from 'expect';
-import { RESULTS_RECEIVED } from '../src/actions/action_types';
+import {
+  RESULTS_RECEIVED,
+  REMOVE_CITY
+} from '../src/actions/action_types';
 
 describe('todos reducer', function(){
   it('should return the initial state', function(){
@@ -27,5 +30,19 @@ describe('todos reducer', function(){
         }
       }]
     )
+  })
+  it('should remove items when deleted', function(){
+    expect(
+      reducer([{
+        city: {
+          name: "San Francisco"
+        }
+      }], {
+        type: REMOVE_CITY,
+        payload: {
+          name: "San Francisco"
+        }
+      })
+    ).toEqual([])
   })
 })

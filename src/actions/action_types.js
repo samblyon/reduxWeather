@@ -1,2 +1,3 @@
 export const FETCH_WEATHER = 'FETCH_WEATHER';
 export const RESULTS_RECEIVED = 'RESULTS_RECEIVED';
+export const REMOVE_CITY = 'REMOVE_CITY'
