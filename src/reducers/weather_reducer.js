@@ -1,4 +1,5 @@
 import { FETCH_WEATHER, RESULTS_RECEIVED } from '../actions/action_types';
+import expect from 'expect';
 
 const filterState = (state, newCityName) => {
   return state.filter(weatherObj => {
@@ -14,3 +15,20 @@ export default function weatherReducer(state = [], action) {
     default: return state;
   }
 }
+
+// expect(
+//   weatherReducer(nil, {
+//     type: 'RESULTS_RECEIVED',
+//     payload: {
+//       city: {
+//         name: "San Francisco"
+//       }
+//     }
+//   }).toEqual([{
+//     city: {
+//       name: "San QFrancisco"
+//     }
+//   }])
+// );
+//
+// console.log('Tests passed!')

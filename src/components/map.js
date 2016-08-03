@@ -7,10 +7,9 @@ import {
 
 export default function Map (props) {
   return (
-    <div style={{height: '200px'}}>
       <GoogleMapLoader
         containerElement={
-          <div style={{height: '100%'}} />
+          <div style={{height: '150px'}} />
         }
         googleMapElement={
           <GoogleMap
@@ -22,6 +21,5 @@ export default function Map (props) {
           />
         }
       />
-    </div>
   );
 }

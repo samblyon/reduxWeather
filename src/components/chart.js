@@ -16,7 +16,7 @@ export default (props) => {
       <div>Avg: {average(props.data)} C</div>
       <Sparklines
         svgHeight={120}
-        svgWidth={120}
+        svgWidth={180}
         data={props.data} >
         <SparklinesLine color={props.color} />
         <SparklinesReferenceLine type="avg" />

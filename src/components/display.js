@@ -10,20 +10,39 @@ const getTemps = (report) => {
 }
 
 class Display extends Component {
+  weatherRow(report){
+    return(
+      <tr key={report.city.name}>
+        <td>{report.city.name}</td>
+        <td>
+          <Map
+            lat={report.city.coord.lat}
+            lng={report.city.coord.lon}
+          />
+        </td>
+        <td><Chart data={getTemps(report)} /></td>
+      </tr>
+    );
+  }
+
   render(){
     const cities = this.props.weather.map(report => {
-      return (
-        <div key={report.city.name}>
-          {report.city.name}
-          <Chart data={getTemps(report)} />
-          <Map lat={report.city.coord.lat}
-              lng={report.city.coord.lon}
-          />
-        </div>
-      );
+      return this.weatherRow(report);
     });
+
     return(
-      <div>{cities}</div>
+      <table className="table table-hover">
+        <thead>
+          <tr>
+            <th>City</th>
+            <th>Location</th>
+            <th>Avg Temp</th>
+          </tr>
+        </thead>
+        <tbody>
+          {cities}
+        </tbody>
+      </table>
     );
   }
 }
