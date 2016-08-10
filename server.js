@@ -1,4 +1,5 @@
 require('babel-register')
+import qs from 'qs'
 import path from 'path'
 import Express from 'express'
 import React from 'react'
@@ -6,7 +7,8 @@ import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 import { renderToString } from 'react-dom/server'
 import App from './src/containers/app'
-import Reducer from './src/reducers/index';
+import Reducer from './src/reducers/index'
+import { doSearch } from './src/actions/search_actions'
 
 
 const app = Express()
@@ -16,21 +18,34 @@ app.use(Express.static(path.join(__dirname, 'public')))
 app.use(handleRender)
 
 function handleRender(req, res){
-  // Create a new Redux store instance
-  const store = createStore(Reducer)
+  // Read cityname from request, if provided
+  const params = qs.parse(req.query)
+  const cityName = params.city
 
-  // Render component to string
-  const html = renderToString(
-    <Provider store={store}>
-      <App />
-    </Provider>
-  )
+  // Query weather asynchronously
+  doSearch(cityName).then(response => {
+    let preloadedState = {
+      weather: [
+        response.data
+      ]
+    }
 
-  // Grab the initial state from Redux store
-  const preloadedState = store.getState()
+    // Create a new Redux store instance
+    const store = createStore(Reducer, preloadedState)
 
-  // Send the rendered page back to the client
-  res.send(renderFullPage(html, preloadedState))
+    // Render component to string
+    const html = renderToString(
+      <Provider store={store}>
+        <App />
+      </Provider>
+    )
+
+    // Grab the initial state from Redux store
+    const stateForClient = store.getState()
+
+    // Send the rendered page back to the client
+    res.send(renderFullPage(html, stateForClient))
+  })
 }
 
 function renderFullPage(html, preloadedState){
