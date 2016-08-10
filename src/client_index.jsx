@@ -14,7 +14,10 @@ const middlewares = [
 
 const createStoreWithMiddleware = applyMiddleware(...middlewares)(createStore);
 
-const store = window.store = createStoreWithMiddleware(Reducer);
+// Grab the state from a global injected into server-generated HTML
+const preloadedState = window.__PRELOADED_STATE__
+
+const store = window.store = createStoreWithMiddleware(Reducer, preloadedState);
 
 document.addEventListener('DOMContentLoaded', () => {
   console.log('hi');
